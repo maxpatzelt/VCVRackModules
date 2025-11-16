@@ -15,17 +15,18 @@ void LfoModule::process(const ProcessArgs &args) {
     float baseFreq = params[FREQUENCY_PARAM].getValue();
     float chaosAmount = params[CHAOS_PARAM].getValue();
 
-    // Sample and hold random values at a certain rate
-    sampleTimer += args.sampleTime;
-    if (sampleTimer >= 0.1f) { // Update random value every 100ms
-        sampleTimer = 0.0f;
-        // Generate new random value
-        rng = rng * 1103515245u + 12345u;
-        float randomValue = (float)(rng & 0x7FFFFFFF) / (float)0x7FFFFFFF;
-        chaosValue = randomValue * 2.0f - 1.0f; // -1 to +1
+    // Generate smooth random modulation (update chaos phase slowly)
+    float chaosFreq = 0.5f; // Chaos LFO runs at 0.5 Hz
+    sampleTimer += chaosFreq * args.sampleTime;
+    while (sampleTimer >= 1.0f) {
+        sampleTimer -= 1.0f;
     }
     
-    // Apply chaos: modulate frequency based on held random value
+    // Use sine wave of random phase for smooth random-like modulation
+    float chaosPhase = sampleTimer + ((float)(rng & 0xFFFF) / 65536.0f);
+    chaosValue = sinf(2.0f * M_PI * chaosPhase);
+    
+    // Apply chaos: smoothly modulate frequency
     // At chaos=0: no modulation (multiplier = 1)
     // At chaos=1: ±300% modulation (multiplier = -2 to 4)
     float freqMultiplier = 1.0f + (chaosValue * chaosAmount * 3.0f);
