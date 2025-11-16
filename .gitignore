@@ -1,0 +1,22 @@
+# Build artifacts
+*.o
+*.d
+*.dll
+*.so
+*.dylib
+build/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies (Rack-SDK is large, typically not committed)
+Rack-SDK/

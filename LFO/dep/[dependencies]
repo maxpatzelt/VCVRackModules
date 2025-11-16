@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "rack": ">=1.0.0",
+    "some-other-library": "^2.3.4"
+  }
+}
