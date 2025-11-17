@@ -2,10 +2,6 @@
 
 ![VCV Rack Modules](VCVModulePicture.PNG)
 
-# VCV Rack Modules Collection
-
-![VCV Rack Modules](VCVModulePicture.PNG)
-
 A focused set of experimental VCV Rack modules shaped by early French electronic research—musique concrète, acousmatic composition, spatial sound analysis—and the disciplined timing, feedback, and spectral shaping of classic dub engineering.
 
 Each module treats sound as a physical process: grains, spectra, delay paths, instability, and perception.
@@ -19,7 +15,6 @@ A compact LFO built around controlled chaos.
 - Sine output
 - Gate in/out
 - Chaos modulation for bounded randomness
-- Purple theme
 
 ### SONOGENESE — Experimental VCO
 
@@ -29,7 +24,6 @@ A waveform generator based on fragmentation and spectral mutation.
 - Chebyshev polynomial warping
 - Nonlinear phase skew
 - Harmonic bloom with spread
-- Gold theme
 
 ### DIFFUSAIRE — Spectral Filter
 
@@ -39,7 +33,6 @@ A filter shaped by diffusion theory and phase dispersion.
 - Resonance from analog to metallic
 - All-pass phase dispersion (Écart)
 - Optional wow/flutter
-- Cyan theme
 
 ### SIREN CONCRÈTE — Dub Siren + Concrète Sampler
 
@@ -49,7 +42,6 @@ A performance instrument combining dub siren control with granular sampling.
 - Multi-harmonic spectral shift
 - Tape-style drift
 - 8-tap delay bloom
-- Red theme
 
 ### DUBBOÎTE 2/4 — Dub Mixer
 
@@ -60,7 +52,6 @@ A four-channel dub mixer emphasizing 2/4 routing and spatial diffusion.
 - Tape scrub modulation
 - Bass drift sculpting
 - Harmonic saturation feedback
-- Orange theme
 
 ### OSCILLATEUR TRITONIQUE — Tritone Oscillator
 
@@ -70,7 +61,6 @@ A tone engine built on tritone tension and shifting harmonics.
 - Micro-delay timing coloration
 - Tritone-oriented harmonic bloom
 - Tritone glide
-- Green theme
 
 ### TEMPORALISTE — Generative Polyrhythm Engine
 
@@ -80,7 +70,6 @@ A probabilistic rhythm generator focused on microtiming and layered density.
 - Timing drift
 - Harmonic "accent shaping" for gates
 - Micro-offset per layer
-- Teal theme
 
 ---
 
