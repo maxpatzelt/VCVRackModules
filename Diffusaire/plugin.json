@@ -1,0 +1,21 @@
+{
+  "slug": "Diffusaire",
+  "name": "Diffusaire",
+  "version": "2.0.0",
+  "license": "MIT",
+  "author": "Max Patzelt",
+  "brand": "MaxPatzelt",
+  "description": "Spectral motion filter with diffusion and micro-fluctuation",
+  "modules": [
+    {
+      "slug": "Diffusaire",
+      "name": "Diffusaire",
+      "description": "French-inspired filter with morphing resonance and spatial dispersion",
+      "tags": [
+        "Filter",
+        "Effect",
+        "Distortion"
+      ]
+    }
+  ]
+}

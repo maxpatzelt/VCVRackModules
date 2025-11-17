@@ -1,0 +1,21 @@
+{
+  "slug": "Sonogenese",
+  "name": "Sonogenese",
+  "version": "2.0.0",
+  "license": "MIT",
+  "author": "Max Patzelt",
+  "brand": "MaxPatzelt",
+  "description": "Experimental artificial waveform generator",
+  "modules": [
+    {
+      "slug": "Sonogenese",
+      "name": "Sonogenese",
+      "description": "French-inspired electro-acoustic oscillator with granular morphing",
+      "tags": [
+        "Oscillator",
+        "Granular",
+        "Effect"
+      ]
+    }
+  ]
+}
