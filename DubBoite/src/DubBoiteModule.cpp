@@ -1,239 +1,170 @@
 #include "DubBoiteModule.hpp"
 #include <cmath>
 
-using namespace rack;
-
 DubBoiteModule::DubBoiteModule() {
-	config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS);
-	
-	// Main knobs
-	configParam(SEND_DIFFUSION_PARAM, 0.0f, 1.0f, 0.0f, "Send Diffusion", "%", 0.f, 100.f);
-	configParam(TAPE_SCRUB_PARAM, 0.0f, 1.0f, 0.0f, "Tape Scrub", "%", 0.f, 100.f);
-	configParam(LOW_DRIFT_PARAM, 0.0f, 1.0f, 0.0f, "Low-End Drift", "%", 0.f, 100.f);
-	configParam(SATURATION_BLOOM_PARAM, 0.0f, 1.0f, 0.0f, "Saturation Bloom", "%", 0.f, 100.f);
-	
-	// Attenuverters
-	configParam(SEND_DIFFUSION_ATTEN_PARAM, -1.0f, 1.0f, 0.0f, "Send Diffusion CV", "%", 0.f, 100.f);
-	configParam(TAPE_SCRUB_ATTEN_PARAM, -1.0f, 1.0f, 0.0f, "Tape Scrub CV", "%", 0.f, 100.f);
-	configParam(LOW_DRIFT_ATTEN_PARAM, -1.0f, 1.0f, 0.0f, "Low-End Drift CV", "%", 0.f, 100.f);
-	configParam(SATURATION_BLOOM_ATTEN_PARAM, -1.0f, 1.0f, 0.0f, "Saturation Bloom CV", "%", 0.f, 100.f);
-	
-	// Inputs
-	configInput(CHANNEL_1_INPUT, "Channel 1");
-	configInput(CHANNEL_2_INPUT, "Channel 2");
-	configInput(CHANNEL_3_INPUT, "Channel 3");
-	configInput(CHANNEL_4_INPUT, "Channel 4");
-	configInput(SEND_DIFFUSION_CV_INPUT, "Send Diffusion CV");
-	configInput(TAPE_SCRUB_CV_INPUT, "Tape Scrub CV");
-	configInput(LOW_DRIFT_CV_INPUT, "Low-End Drift CV");
-	configInput(SATURATION_BLOOM_CV_INPUT, "Saturation Bloom CV");
-	
-	// Outputs
-	configOutput(MIX_OUTPUT, "Mix");
-	configOutput(SEND_OUTPUT, "Send");
-	
-	// Initialize state
-	scrubPhase = 0.0f;
-	lowDriftPhase = 0.0f;
-	rng = 54321;
-	
-	for (int ch = 0; ch < NUM_CHANNELS; ch++) {
-		delayWritePos[ch] = 0;
-		lowpassState[ch] = 0.0f;
-		saturationMemory[ch] = 0.0f;
-		for (int i = 0; i < DELAY_SIZE; i++) {
-			delayBuffers[ch][i] = 0.0f;
-		}
-	}
-	
-	for (int p = 0; p < NUM_PATHS; p++) {
-		diffusionWritePos[p] = 0;
-		pathAmps[p] = 0.7f + random() * 0.3f;
-		for (int i = 0; i < DELAY_SIZE; i++) {
-			diffusionPaths[p][i] = 0.0f;
-		}
-	}
+    config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
+    
+    // Channel faders (0-1 range)
+    configParam(CH1_FADER, 0.f, 1.f, 0.8f, "Channel 1 Level", "%", 0, 100);
+    configParam(CH2_FADER, 0.f, 1.f, 0.8f, "Channel 2 Level", "%", 0, 100);
+    configParam(CH3_FADER, 0.f, 1.f, 0.8f, "Channel 3 Level", "%", 0, 100);
+    configParam(CH4_FADER, 0.f, 1.f, 0.8f, "Channel 4 Level", "%", 0, 100);
+    
+    // Effect knobs
+    configParam(DIFFUSION_KNOB, 0.f, 1.f, 0.4f, "Send Diffusion");
+    configParam(SCRUB_KNOB, 0.f, 1.f, 0.3f, "Tape Scrub");
+    configParam(LOWDRIFT_KNOB, 0.f, 1.f, 0.2f, "Low-End Drift");
+    configParam(SATURATION_KNOB, 0.f, 1.f, 0.5f, "Saturation Bloom");
+    
+    // Master fader
+    configParam(MASTER_FADER, 0.f, 1.f, 0.9f, "Master Level", "%", 0, 100);
+    
+    // Inputs/outputs
+    configInput(CH1_INPUT, "Channel 1");
+    configInput(CH2_INPUT, "Channel 2");
+    configInput(CH3_INPUT, "Channel 3");
+    configInput(CH4_INPUT, "Channel 4");
+    configOutput(MIX_OUTPUT, "Mix");
+    configOutput(SEND_OUTPUT, "Effects Send");
+    
+    masterVu.lambda = 1 / 0.1f; // 100ms integration time
 }
 
-void DubBoiteModule::process(const ProcessArgs& args) {
-	// Get CV-modulated parameters
-	float sendDiffusion = params[SEND_DIFFUSION_PARAM].getValue();
-	if (inputs[SEND_DIFFUSION_CV_INPUT].isConnected()) {
-		sendDiffusion += inputs[SEND_DIFFUSION_CV_INPUT].getVoltage() * params[SEND_DIFFUSION_ATTEN_PARAM].getValue() * 0.1f;
-	}
-	sendDiffusion = clamp(sendDiffusion, 0.0f, 1.0f);
-	
-	float tapeScrub = params[TAPE_SCRUB_PARAM].getValue();
-	if (inputs[TAPE_SCRUB_CV_INPUT].isConnected()) {
-		tapeScrub += inputs[TAPE_SCRUB_CV_INPUT].getVoltage() * params[TAPE_SCRUB_ATTEN_PARAM].getValue() * 0.1f;
-	}
-	tapeScrub = clamp(tapeScrub, 0.0f, 1.0f);
-	
-	float lowDrift = params[LOW_DRIFT_PARAM].getValue();
-	if (inputs[LOW_DRIFT_CV_INPUT].isConnected()) {
-		lowDrift += inputs[LOW_DRIFT_CV_INPUT].getVoltage() * params[LOW_DRIFT_ATTEN_PARAM].getValue() * 0.1f;
-	}
-	lowDrift = clamp(lowDrift, 0.0f, 1.0f);
-	
-	float saturationBloom = params[SATURATION_BLOOM_PARAM].getValue();
-	if (inputs[SATURATION_BLOOM_CV_INPUT].isConnected()) {
-		saturationBloom += inputs[SATURATION_BLOOM_CV_INPUT].getVoltage() * params[SATURATION_BLOOM_ATTEN_PARAM].getValue() * 0.1f;
-	}
-	saturationBloom = clamp(saturationBloom, 0.0f, 1.0f);
-	
-	// Process all channels
-	float mixSum = 0.0f;
-	float sendSum = 0.0f;
-	
-	Input* channelInputs[4] = {
-		&inputs[CHANNEL_1_INPUT],
-		&inputs[CHANNEL_2_INPUT],
-		&inputs[CHANNEL_3_INPUT],
-		&inputs[CHANNEL_4_INPUT]
-	};
-	
-	for (int ch = 0; ch < NUM_CHANNELS; ch++) {
-		if (!channelInputs[ch]->isConnected()) continue;
-		
-		float input = channelInputs[ch]->getVoltage();
-		
-		// Process each effect stage
-		float processed = input;
-		
-		// Stage 1: Low-End Drift
-		processed = processLowDrift(processed, ch, lowDrift, args.sampleRate);
-		
-		// Stage 2: Tape Scrub
-		processed = processTapeScrub(processed, ch, tapeScrub, args.sampleRate);
-		
-		// Stage 3: Saturation Bloom
-		processed = processSaturationBloom(processed, ch, saturationBloom);
-		
-		// Add to mix
-		mixSum += processed * 0.25f; // Normalize by channel count
-		
-		// Send to diffusion network
-		float diffused = processSendDiffusion(processed, ch, sendDiffusion, args.sampleRate);
-		sendSum += diffused * 0.25f;
-	}
-	
-	outputs[MIX_OUTPUT].setVoltage(clamp(mixSum, -10.0f, 10.0f));
-	outputs[SEND_OUTPUT].setVoltage(clamp(sendSum, -10.0f, 10.0f));
+float DubBoiteModule::processSendDiffusion(float input, float diffusion) {
+    if (diffusion < 0.01f) return 0.f;
+    
+    float output = 0.f;
+    for (int i = 0; i < NUM_PATHS; i++) {
+        int delayMs = 10 + i * 10; // 10ms to 80ms
+        int delaySamples = (int)(delayMs * 48.f); // Assume 48kHz
+        
+        // Write input to path
+        diffusionPaths[i][diffusionWritePos[i]] = input;
+        
+        // Read delayed signal
+        int readPos = (diffusionWritePos[i] - delaySamples + DELAY_SIZE) % DELAY_SIZE;
+        float delayed = diffusionPaths[i][readPos];
+        
+        // Apply spectral coloration
+        float brightness = (float)i / NUM_PATHS;
+        output += delayed * (0.7f + brightness * 0.3f) / NUM_PATHS;
+        
+        diffusionWritePos[i] = (diffusionWritePos[i] + 1) % DELAY_SIZE;
+    }
+    
+    return output * diffusion;
 }
 
-// ================================================================
-// DSP HELPER FUNCTIONS
-// ================================================================
-
-float DubBoiteModule::processSendDiffusion(float input, int channel, float diffusion, float sampleRate) {
-	if (diffusion < 0.01f) return input;
-	
-	// Spread signal across multiple micro-paths for spatial diffusion
-	float output = input * (1.0f - diffusion * 0.8f);
-	
-	for (int p = 0; p < NUM_PATHS; p++) {
-		// Each path has different delay time
-		float pathDelay = 0.01f + (float)p * 0.008f + diffusion * 0.05f;
-		int delaySamples = (int)(pathDelay * sampleRate);
-		
-		// Write to path
-		diffusionPaths[p][diffusionWritePos[p]] = input;
-		diffusionWritePos[p] = (diffusionWritePos[p] + 1) % DELAY_SIZE;
-		
-		// Read from path with modulation
-		int readPos = (diffusionWritePos[p] - delaySamples + DELAY_SIZE) % DELAY_SIZE;
-		float pathSample = diffusionPaths[p][readPos];
-		
-		// Apply path-specific amplitude and coloration
-		float pathOutput = pathSample * pathAmps[p] * diffusion;
-		
-		// Spectral coloration per path
-		if (p % 3 == 0) {
-			pathOutput *= 0.8f; // Darker
-		} else if (p % 3 == 1) {
-			pathOutput *= 1.2f; // Brighter
-		}
-		
-		output += pathOutput / (float)NUM_PATHS;
-	}
-	
-	return output;
+float DubBoiteModule::processTapeScrub(float input, int channel, float scrub, float sampleTime) {
+    // LFO with harmonics
+    float lfoFreq = 0.3f + scrub * 2.f; // 0.3-2.3Hz
+    scrubPhase += lfoFreq * sampleTime;
+    if (scrubPhase >= 1.f) scrubPhase -= 1.f;
+    
+    float lfo = std::sin(2.f * M_PI * scrubPhase);
+    lfo += std::sin(2.f * M_PI * scrubPhase * 2.7f) * 0.3f;
+    lfo += std::sin(2.f * M_PI * scrubPhase * 5.3f) * 0.2f;
+    
+    // Modulated delay 5-25ms
+    int baseDelay = (int)(15.f * 48.f);
+    int modDelay = (int)(10.f * 48.f * lfo * scrub);
+    int totalDelay = clamp(baseDelay + modDelay, 1, DELAY_SIZE - 1);
+    
+    delayBuffers[channel][delayWritePos[channel]] = input;
+    int readPos = (delayWritePos[channel] - totalDelay + DELAY_SIZE) % DELAY_SIZE;
+    float output = delayBuffers[channel][readPos];
+    
+    delayWritePos[channel] = (delayWritePos[channel] + 1) % DELAY_SIZE;
+    
+    return output * scrub + input * (1.f - scrub);
 }
 
-float DubBoiteModule::processTapeScrub(float input, int channel, float scrub, float sampleRate) {
-	if (scrub < 0.01f) return input;
-	
-	// Tape-style delay modulation for imperfection
-	float scrubLFOFreq = 0.3f + scrub * 2.0f; // 0.3 - 2.3 Hz
-	scrubPhase += scrubLFOFreq / sampleRate;
-	if (scrubPhase >= 1.0f) scrubPhase -= 1.0f;
-	
-	// Create wobble with multiple harmonics
-	float wobble = std::sin(2.0f * M_PI * scrubPhase);
-	wobble += 0.4f * std::sin(2.0f * M_PI * scrubPhase * 2.7f);
-	wobble += 0.2f * std::sin(2.0f * M_PI * scrubPhase * 5.3f);
-	
-	// Write to delay
-	delayBuffers[channel][delayWritePos[channel]] = input;
-	delayWritePos[channel] = (delayWritePos[channel] + 1) % DELAY_SIZE;
-	
-	// Modulated delay time
-	float baseDelay = 0.005f + scrub * 0.02f; // 5-25ms
-	float modulatedDelay = baseDelay * (1.0f + wobble * scrub * 0.15f);
-	int delaySamples = (int)(modulatedDelay * sampleRate);
-	delaySamples = clamp(delaySamples, 1, DELAY_SIZE - 1);
-	
-	int readPos = (delayWritePos[channel] - delaySamples + DELAY_SIZE) % DELAY_SIZE;
-	float delayedSample = delayBuffers[channel][readPos];
-	
-	// Blend with dry
-	return input * (1.0f - scrub * 0.5f) + delayedSample * scrub * 0.5f;
-}
-
-float DubBoiteModule::processLowDrift(float input, int channel, float drift, float sampleRate) {
-	if (drift < 0.01f) return input;
-	
-	// Detune bass frequencies with slow LFO
-	lowDriftPhase += 0.2f / sampleRate; // Very slow drift (0.2 Hz)
-	if (lowDriftPhase >= 1.0f) lowDriftPhase -= 1.0f;
-	
-	float driftLFO = std::sin(2.0f * M_PI * lowDriftPhase);
-	
-	// Lowpass filter to isolate bass
-	float cutoff = 200.0f / sampleRate;
-	float f = 2.0f * std::sin(M_PI * cutoff);
-	f = clamp(f, 0.0001f, 1.5f);
-	
-	lowpassState[channel] += f * (input - lowpassState[channel]);
-	lowpassState[channel] = clamp(lowpassState[channel], -10.0f, 10.0f);
-	
-	// Apply drift to low end only
-	float driftedLow = lowpassState[channel] * (1.0f + driftLFO * drift * 0.1f);
-	float high = input - lowpassState[channel];
-	
-	return driftedLow + high;
+float DubBoiteModule::processLowDrift(float input, int channel, float drift, float sampleTime) {
+    if (drift < 0.01f) return input;
+    
+    // 200Hz lowpass
+    float cutoff = 200.f;
+    float rc = 1.f / (2.f * M_PI * cutoff);
+    float alpha = sampleTime / (rc + sampleTime);
+    lowpassState[channel] += alpha * (input - lowpassState[channel]);
+    
+    // Drift LFO at 0.2Hz
+    lowDriftPhase += 0.2f * sampleTime;
+    if (lowDriftPhase >= 1.f) lowDriftPhase -= 1.f;
+    float lfo = std::sin(2.f * M_PI * lowDriftPhase);
+    
+    // Mix drifted lows back
+    float driftedLow = lowpassState[channel] * (1.f + lfo * drift * 0.3f);
+    return input * (1.f - drift * 0.5f) + driftedLow * drift * 0.5f;
 }
 
 float DubBoiteModule::processSaturationBloom(float input, int channel, float bloom) {
-	if (bloom < 0.01f) return input;
-	
-	// Dynamic spectral saturation with soft clipping
-	float drive = 1.0f + bloom * 3.0f;
-	float driven = input * drive;
-	
-	// Soft saturation using tanh
-	float saturated = std::tanh(driven);
-	
-	// Add harmonic bloom through waveshaping
-	float bloom2 = saturated + bloom * 0.3f * std::sin(saturated * 3.0f * M_PI);
-	
-	// Apply gentle feedback for warmth
-	saturationMemory[channel] = bloom2 * 0.1f * bloom + saturationMemory[channel] * 0.9f;
-	saturationMemory[channel] = clamp(saturationMemory[channel], -1.0f, 1.0f);
-	
-	float output = bloom2 + saturationMemory[channel] * bloom * 0.2f;
-	
-	// Normalize and blend
-	output = output / drive * 0.8f;
-	return input * (1.0f - bloom * 0.6f) + output * bloom * 0.6f;
+    if (bloom < 0.01f) return input;
+    
+    float drive = 1.f + bloom * 3.f; // 1-4x
+    float driven = input * drive;
+    
+    // Tanh saturation
+    float saturated = std::tanh(driven);
+    
+    // Harmonic waveshaping
+    float shaped = saturated + std::sin(saturated * 3.f * M_PI) * bloom * 0.2f;
+    
+    // Feedback
+    saturationMemory[channel] = shaped * 0.1f;
+    shaped += saturationMemory[channel] * bloom;
+    
+    return shaped;
+}
+
+void DubBoiteModule::process(const ProcessArgs& args) {
+    float diffusion = params[DIFFUSION_KNOB].getValue();
+    float scrub = params[SCRUB_KNOB].getValue();
+    float lowdrift = params[LOWDRIFT_KNOB].getValue();
+    float saturation = params[SATURATION_KNOB].getValue();
+    float master = params[MASTER_FADER].getValue();
+    
+    float mixSum = 0.f;
+    float sendSum = 0.f;
+    
+    for (int i = 0; i < 4; i++) {
+        if (!inputs[CH1_INPUT + i].isConnected()) {
+            lights[CH1_LIGHT + i].setBrightness(0.f);
+            continue;
+        }
+        
+        float input = inputs[CH1_INPUT + i].getVoltage();
+        float fader = params[CH1_FADER + i].getValue();
+        
+        // Process chain
+        float sig = input * fader;
+        sig = processTapeScrub(sig, i, scrub, args.sampleTime);
+        sig = processLowDrift(sig, i, lowdrift, args.sampleTime);
+        sig = processSaturationBloom(sig, i, saturation);
+        
+        // Send to diffusion
+        sendSum += sig * diffusion;
+        
+        // Mix
+        mixSum += sig;
+        
+        // Channel light
+        lights[CH1_LIGHT + i].setBrightness(std::abs(sig) * 0.2f);
+    }
+    
+    // Process send diffusion
+    float sendOut = processSendDiffusion(sendSum, diffusion);
+    
+    // Apply master
+    float finalMix = mixSum * master;
+    
+    // VU meter
+    masterVu.process(args.sampleTime, finalMix / 5.f);
+    lights[MASTER_LIGHTS + 0].setBrightness(masterVu.getBrightness(0.f, 0.f));
+    lights[MASTER_LIGHTS + 1].setBrightness(masterVu.getBrightness(0.f, 1.f));
+    lights[MASTER_LIGHTS + 2].setBrightness(masterVu.getBrightness(1.f, 0.f));
+    
+    // Outputs
+    outputs[MIX_OUTPUT].setVoltage(finalMix);
+    outputs[SEND_OUTPUT].setVoltage(sendOut * master);
 }

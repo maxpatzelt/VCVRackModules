@@ -1,16 +1,27 @@
 {
   "slug": "DubBoite",
+  "name": "DUBBOÎTE 2/4",
   "version": "2.0.0",
   "license": "MIT",
-  "brand": "MaxPatzelt",
-  "name": "DubBoite",
-  "author": "Max Patzelt",
+  "brand": "RackDev",
+  "author": "Max Paterson",
+  "authorEmail": "",
+  "authorUrl": "",
+  "pluginUrl": "",
+  "manualUrl": "",
+  "sourceUrl": "",
+  "donateUrl": "",
+  "changelogUrl": "",
   "modules": [
     {
-      "slug": "DubBoiteModule",
+      "slug": "DubBoite",
       "name": "DUBBOÎTE 2/4",
-      "description": "Dub Mixer with 2/4 Groove + Effects Diffusion",
-      "tags": [ "Mixer", "Effect", "Delay" ]
+      "description": "12HP 4-Channel Dub Mixer with Faders and Effects",
+      "tags": [
+        "Mixer",
+        "Effect",
+        "Distortion"
+      ]
     }
   ]
 }

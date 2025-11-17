@@ -4,7 +4,7 @@ RACK_DIR ?= ../Rack-SDK
 # Plugin slug
 SLUG = DubBoite
 
-# Source files - must be set before including plugin.mk
+# Source files
 SOURCES += src/plugin.cpp
 SOURCES += src/DubBoiteModule.cpp
 
@@ -16,7 +16,7 @@ include $(RACK_DIR)/plugin.mk
 
 DEV_PLUGIN_DIR := $(LOCALAPPDATA)/Rack2/plugins-win-x64/$(SLUG)
 
-# Development install: copy raw files directly for live debugging (Rack must be closed)
+# Development install
 devinstall: all
 	mkdir -p "$(DEV_PLUGIN_DIR)"
 	rm -f "$(DEV_PLUGIN_DIR)/plugin.dll"
@@ -27,4 +27,4 @@ devinstall: all
 
 # Convenience target: clean then devinstall
 reinstall: clean devinstall
-	@echo "Reinstalled $(SLUG) (clean build + dev copy)"
+	@echo "Reinstalled $(SLUG)"

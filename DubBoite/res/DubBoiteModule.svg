@@ -1,56 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   width="121.92"
-   height="380"
-   viewBox="0 0 121.92 380"
-   version="1.1"
-   xmlns="http://www.w3.org/2000/svg">
-  
-  <!-- Background -->
-  <rect
-     fill="#1a1a2e"
-     width="121.92"
-     height="380"
-     x="0"
-     y="0"
-     rx="8" />
+<svg width="243.84" height="380" viewBox="0 0 243.84 380" xmlns="http://www.w3.org/2000/svg">
+  <!-- Panel Background - Orange theme (12HP width = 243.84px) -->
+  <rect width="243.84" height="380" fill="#1a1a2e" rx="8"/>
   
   <!-- Orange decorative accent lines -->
-  <line x1="10" y1="35" x2="111.92" y2="35" stroke="#e8a039" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
-  <line x1="10" y1="345" x2="111.92" y2="345" stroke="#e8a039" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  <line x1="10" y1="35" x2="233.84" y2="35" stroke="#e8a039" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  <line x1="10" y1="345" x2="233.84" y2="345" stroke="#e8a039" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
   
   <!-- Decorative dots -->
   <circle cx="20" cy="50" r="1.5" fill="#e8a039" opacity="0.6"/>
-  <circle cx="101.92" cy="50" r="1.5" fill="#e8a039" opacity="0.6"/>
-  <circle cx="20" cy="330" r="1.5" fill="#c08020" opacity="0.6"/>
-  <circle cx="101.92" cy="330" r="1.5" fill="#c08020" opacity="0.6"/>
+  <circle cx="223.84" cy="50" r="1.5" fill="#e8a039" opacity="0.6"/>
+  <circle cx="20" cy="330" r="1.5" fill="#d48f30" opacity="0.6"/>
+  <circle cx="223.84" cy="330" r="1.5" fill="#d48f30" opacity="0.6"/>
   
-  <!-- Main knob circles - 2x2 grid -->
-  <circle fill="#2a2a40" stroke="#e8a039" stroke-width="2" cx="49.73" cy="90" r="18"/>
-  <circle fill="#2a2a40" stroke="#e8a039" stroke-width="2" cx="194.14" cy="90" r="18"/>
-  <circle fill="#2a2a40" stroke="#e8a039" stroke-width="2" cx="49.73" cy="184" r="18"/>
-  <circle fill="#2a2a40" stroke="#e8a039" stroke-width="2" cx="194.14" cy="184" r="18"/>
+  <!-- Title -->
+  <text x="121.92" y="24" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#e8a039" font-weight="bold" text-anchor="middle">DUBBOÎTE 2/4</text>
   
-  <!-- Attenuverter circles -->
-  <circle fill="none" stroke="#c08830" stroke-width="1" cx="49.73" cy="283.5" r="8"/>
-  <circle fill="none" stroke="#c08830" stroke-width="1" cx="194.14" cy="283.5" r="8"/>
-  <circle fill="none" stroke="#c08830" stroke-width="1" cx="49.73" cy="321.3" r="8"/>
-  <circle fill="none" stroke="#c08830" stroke-width="1" cx="194.14" cy="321.3" r="8"/>
+  <!-- Effect knob circles (top row) -->
+  <circle fill="#2a2a40" stroke="#e8a039" stroke-width="2" cx="45" cy="75" r="18"/>
+  <text x="45" y="105" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Diffusion</text>
   
-  <!-- CV input jacks -->
-  <circle fill="none" stroke="#c08830" stroke-width="1.5" cx="49.73" cy="347.6" r="12"/>
-  <circle fill="none" stroke="#c08830" stroke-width="1.5" cx="194.14" cy="347.6" r="12"/>
-  <circle fill="none" stroke="#c08830" stroke-width="1.5" cx="49.73" cy="378" r="12"/>
-  <circle fill="none" stroke="#c08830" stroke-width="1.5" cx="194.14" cy="378" r="12"/>
+  <circle fill="#2a2a40" stroke="#e8a039" stroke-width="2" cx="100" cy="75" r="18"/>
+  <text x="100" y="105" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Scrub</text>
   
-  <!-- Channel inputs -->
-  <circle fill="none" stroke="#e8a039" stroke-width="1.5" cx="49.73" cy="415.8" r="12"/>
-  <circle fill="none" stroke="#e8a039" stroke-width="1.5" cx="49.73" cy="446.1" r="12"/>
-  <circle fill="none" stroke="#e8a039" stroke-width="1.5" cx="194.14" cy="415.8" r="12"/>
-  <circle fill="none" stroke="#e8a039" stroke-width="1.5" cx="194.14" cy="446.1" r="12"/>
+  <circle fill="#2a2a40" stroke="#e8a039" stroke-width="2" cx="155" cy="75" r="18"/>
+  <text x="155" y="105" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">LowDrift</text>
+  
+  <circle fill="#2a2a40" stroke="#e8a039" stroke-width="2" cx="210" cy="75" r="18"/>
+  <text x="210" y="105" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Saturation</text>
+  
+  <!-- Channel section label -->
+  <text x="30" y="135" font-family="sans-serif" font-size="11" fill="#e8a039" text-anchor="middle" font-weight="bold">CHANNELS</text>
+  <text x="40" y="285" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">1</text>
+  <text x="85" y="285" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">2</text>
+  <text x="130" y="285" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">3</text>
+  <text x="175" y="285" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">4</text>
+  
+  <!-- Master section -->
+  <text x="220" y="135" font-family="sans-serif" font-size="11" fill="#e8a039" text-anchor="middle" font-weight="bold">MASTER</text>
   
   <!-- Output jacks -->
-  <circle fill="none" stroke="#f0b050" stroke-width="2" cx="121.92" cy="476.4" r="12"/>
-  <circle fill="none" stroke="#f0b050" stroke-width="2" cx="121.92" cy="506.7" r="12"/>
+  <circle fill="#1a1a2e" stroke="#e8a039" stroke-width="2" cx="180" cy="320" r="12"/>
+  <text x="180" y="343" font-family="sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Mix</text>
   
+  <circle fill="#1a1a2e" stroke="#e8a039" stroke-width="2" cx="220" cy="320" r="12"/>
+  <text x="220" y="343" font-family="sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">Send</text>
 </svg>
