@@ -77,15 +77,6 @@ This collection draws from the electroacoustic traditions of Pierre Schaeffer's 
 - **Acousmatic listening**: Sound divorced from its source, transformed through processing
 - **2/4 groove orientation**: Rhythm structures suited to dub/reggae traditions
 
-## Common Architecture
-
-All 4HP modules (Sonogenese, Diffusaire, Siren Concrète, Oscillateur Tritonique, Temporaliste) share:
-- **Width**: 4HP
-- **Knob Layout**: 2×2 grid with proper spacing matching Diffusaire standard
-- **CV Control**: Attenuverters and CV inputs for all main parameters
-- **I/O**: Bottom-mounted jacks with clear labeling
-- **Design**: Decorative accent lines and corner dots for visual consistency
-
 ## Building
 
 Each module can be built independently:
