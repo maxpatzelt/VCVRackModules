@@ -1,5 +1,7 @@
 # VCV Rack Modules Collection
 
+![VCV Rack Modules](VCVModulePicture.PNG)
+
 A collection of experimental VCV Rack modules inspired by early French electronic music traditions—musique concrète, acousmatic composition, and dub-influenced electroacoustic processing. These modules embrace tape manipulation, spectral transformation, granular synthesis, and spatial effects rooted in the pioneering work of GRM (Groupe de Recherches Musicales) and Jamaican dub studio techniques.
 
 ## Modules
