@@ -7,7 +7,7 @@
   "author": "Max Patzelt",
   "modules": [
     {
-      "slug": "OscillateurTritoniqueModule",
+      "slug": "OscillateurTritonique",
       "name": "OSCILLATEUR TRITONIQUE",
       "description": "Tritone Stabs + Wandering Bass Engine",
       "tags": [ "Oscillator", "Waveshaper" ]

@@ -7,7 +7,7 @@
   "author": "Max Patzelt",
   "modules": [
     {
-      "slug": "SirenConcreteModule",
+      "slug": "SirenConcrete",
       "name": "SIREN CONCRÈTE",
       "description": "Dub Siren + Musique-Concrète Sampler",
       "tags": [ "Oscillator", "Granular", "Effect" ]

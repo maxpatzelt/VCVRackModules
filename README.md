@@ -36,13 +36,14 @@ A collection of experimental VCV Rack modules inspired by early French electroni
 - V/Oct input, audio output
 - Color scheme: Red (#e83939)
 
-### DUBBOÎTE 2/4
-**4HP Orange-themed 4-Channel Dub Mixer with 2/4 Groove Orientation**
+### DUBBOÎTE
+**8HP Orange-themed 4-Channel Dub Mixer with Send Effects**
+- **4 Channel Strips**: Individual faders and LEDs for each channel
 - **Send Diffusion**: Multi-path spatial diffusion (8 paths, 10-90ms)
 - **Tape Scrub**: LFO-modulated delay for tape wobble (0.3-2.3Hz)
 - **Low-End Drift**: Bass-only drift via 200Hz lowpass + LFO
 - **Saturation Bloom**: Harmonic saturation with feedback (1-4x drive)
-- 4 channel inputs, mix output, send output
+- 4 channel inputs, master fader, mix output, send output
 - Color scheme: Orange (#e8a039)
 
 ### OSCILLATEUR TRITONIQUE
@@ -78,11 +79,12 @@ This collection draws from the electroacoustic traditions of Pierre Schaeffer's 
 
 ## Common Architecture
 
-The dub-oriented modules (Siren Concrète, DubBoîte, Oscillateur Tritonique, Temporaliste) share:
+All 4HP modules (Sonogenese, Diffusaire, Siren Concrète, Oscillateur Tritonique, Temporaliste) share:
 - **Width**: 4HP
-- **Knob Layout**: 2×2 grid with large knobs
-- **CV Control**: Full CV control with attenuverters for all parameters
-- **Color Progression**: Red → Orange → Green → Teal
+- **Knob Layout**: 2×2 grid with proper spacing matching Diffusaire standard
+- **CV Control**: Attenuverters and CV inputs for all main parameters
+- **I/O**: Bottom-mounted jacks with clear labeling
+- **Design**: Decorative accent lines and corner dots for visual consistency
 
 ## Building
 

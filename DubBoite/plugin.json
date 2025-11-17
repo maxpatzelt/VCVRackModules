@@ -3,8 +3,8 @@
   "name": "DUBBOÎTE 2/4",
   "version": "2.0.0",
   "license": "MIT",
-  "brand": "RackDev",
-  "author": "Max Paterson",
+  "brand": "MaxPatzelt",
+  "author": "Max Patzelt",
   "authorEmail": "",
   "authorUrl": "",
   "pluginUrl": "",
@@ -16,7 +16,7 @@
     {
       "slug": "DubBoite",
       "name": "DUBBOÎTE 2/4",
-      "description": "12HP 4-Channel Dub Mixer with Faders and Effects",
+      "description": "4-Channel Dub Mixer with Faders and Effects",
       "tags": [
         "Mixer",
         "Effect",
