@@ -2,86 +2,101 @@
 
 ![VCV Rack Modules](VCVModulePicture.PNG)
 
-A collection of experimental VCV Rack modules inspired by early French electronic music traditions—musique concrète, acousmatic composition, and dub-influenced electroacoustic processing. These modules embrace tape manipulation, spectral transformation, granular synthesis, and spatial effects rooted in the pioneering work of GRM (Groupe de Recherches Musicales) and Jamaican dub studio techniques.
+# VCV Rack Modules Collection
+
+![VCV Rack Modules](VCVModulePicture.PNG)
+
+A focused set of experimental VCV Rack modules shaped by early French electronic research—musique concrète, acousmatic composition, spatial sound analysis—and the disciplined timing, feedback, and spectral shaping of classic dub engineering.
+
+Each module treats sound as a physical process: grains, spectra, delay paths, instability, and perception.
 
 ## Modules
 
-### OBF (Oscillateur à Basse Fréquence)
-**2HP Purple-themed LFO**
-- Low-frequency oscillator with chaos parameter
-- Gate input and output for synchronization
-- Sine wave output
-- Color scheme: Purple (#9b59d0)
+### OBF — Oscillateur à Basse Fréquence
 
-### SONOGENESE
-**4HP Gold-themed Experimental VCO**
-- Granular fragmentation with jittered grain synthesis
-- Chebyshev polynomial topology warping (orders 2-9)
-- Temporal skewing with nonlinear phase modulation
-- Spectral bloom with up to 16 harmonics (9x spread)
-- Color scheme: Gold (#e8b339)
+A compact LFO built around controlled chaos.
 
-### DIFFUSAIRE
-**4HP Cyan-themed Spectral Filter**
-- Multi-pole cascaded filter with morphing contours
-- Variable resonance modes (soft analog → metallic → fractalized)
-- All-pass phase dispersion network (Écart)
-- Cinematic wow and flutter modulation
-- Color scheme: Cyan (#39c5e8)
+- Sine output
+- Gate in/out
+- Chaos modulation for bounded randomness
+- Purple theme
 
-### SIREN CONCRÈTE
-**4HP Red-themed Dub Siren with Musique-Concrète Granular Sampling**
-- **Grain Morph**: Granular texture scatter (8 grains with jittered playback)
-- **Spectral Shift**: Harmonic frequency shifting (16 harmonics, 0-2x)
-- **Phase Drift**: Tape-style instability via micro LFO (0.5-3.5Hz)
-- **Echo Bloom**: 8-tap delay network with spectral coloration (50-250ms)
-- V/Oct input, audio output
-- Color scheme: Red (#e83939)
+### SONOGENESE — Experimental VCO
 
-### DUBBOÎTE
-**8HP Orange-themed 4-Channel Dub Mixer with Send Effects**
-- **4 Channel Strips**: Individual faders and LEDs for each channel
-- **Send Diffusion**: Multi-path spatial diffusion (8 paths, 10-90ms)
-- **Tape Scrub**: LFO-modulated delay for tape wobble (0.3-2.3Hz)
-- **Low-End Drift**: Bass-only drift via 200Hz lowpass + LFO
-- **Saturation Bloom**: Harmonic saturation with feedback (1-4x drive)
-- 4 channel inputs, master fader, mix output, send output
-- Color scheme: Orange (#e8a039)
+A waveform generator based on fragmentation and spectral mutation.
 
-### OSCILLATEUR TRITONIQUE
-**4HP Green-themed Tritone Stabs + Wandering Bass Engine**
-- **Topology Warp**: Morph sine → sawtooth → folded waveforms
-- **Temporal Skew**: Micro-delay modulation for timing instability (0-10ms)
-- **Spectral Bloom**: Harmonic expansion with tritone inflection (12 harmonics)
-- **Tritone Glide**: Portamento with tritone modulation (1-500ms)
-- V/Oct input, audio output
-- Color scheme: Green (#39e87c)
+- Grain-based micro-synthesis
+- Chebyshev polynomial warping
+- Nonlinear phase skew
+- Harmonic bloom with spread
+- Gold theme
 
-### TEMPORALISTE
-**4HP Teal-themed Generative Polyrhythm Sequencer with 2/4 Orientation**
-- **Polyrhythmic Density**: Controls active layers (1-4) and probability
-- **Stochastic Drift**: Probabilistic timing variation and phase offset
-- **Spectral Accent**: Harmonic shaping of gate events
-- **Time-Space Shift**: Per-layer micro-timing offsets (0-20ms)
-- Clock input, 4 gate outputs
-- Color scheme: Teal (#39e8d4)
+### DIFFUSAIRE — Spectral Filter
+
+A filter shaped by diffusion theory and phase dispersion.
+
+- Morphable multi-pole contours
+- Resonance from analog to metallic
+- All-pass phase dispersion (Écart)
+- Optional wow/flutter
+- Cyan theme
+
+### SIREN CONCRÈTE — Dub Siren + Concrète Sampler
+
+A performance instrument combining dub siren control with granular sampling.
+
+- 8-grain scatter
+- Multi-harmonic spectral shift
+- Tape-style drift
+- 8-tap delay bloom
+- Red theme
+
+### DUBBOÎTE 2/4 — Dub Mixer
+
+A four-channel dub mixer emphasizing 2/4 routing and spatial diffusion.
+
+- Independent channel strips
+- Multi-path diffusion
+- Tape scrub modulation
+- Bass drift sculpting
+- Harmonic saturation feedback
+- Orange theme
+
+### OSCILLATEUR TRITONIQUE — Tritone Oscillator
+
+A tone engine built on tritone tension and shifting harmonics.
+
+- Morphing topology
+- Micro-delay timing coloration
+- Tritone-oriented harmonic bloom
+- Tritone glide
+- Green theme
+
+### TEMPORALISTE — Generative Polyrhythm Engine
+
+A probabilistic rhythm generator focused on microtiming and layered density.
+
+- Density and probability per layer
+- Timing drift
+- Harmonic "accent shaping" for gates
+- Micro-offset per layer
+- Teal theme
 
 ---
 
 ## Design Philosophy
 
-This collection draws from the electroacoustic traditions of Pierre Schaeffer's musique concrète, the acousmatic practices of François Bayle and GRM, and the spatial/temporal manipulation techniques pioneered in Jamaican dub studios. Each module embodies:
+These modules reflect a hybrid lineage:
 
-- **Tape manipulation**: Wow, flutter, scrub, and phase drift
-- **Spectral transformation**: Harmonic shifting, bloom, and morphing
-- **Granular synthesis**: Jittered grains, scattered playback, temporal fragmentation
-- **Spatial processing**: Multi-path diffusion, delay networks, echo chambers
-- **Acousmatic listening**: Sound divorced from its source, transformed through processing
-- **2/4 groove orientation**: Rhythm structures suited to dub/reggae traditions
+- GRM-style spectral and temporal analysis
+- Musique concrète's attention to gesture, fragmentation, and source ambiguity
+- Dub's discipline of echo, feedback, saturation, and low-frequency motion
+- Spatial reasoning through delay networks and diffusion
+- Controlled instability: wow, flutter, dispersion, microtiming
+
+The goal is not retro emulation, but a scientific yet reflective approach to sound—treating time, frequency, and space as materials that can be shaped.
 
 ## Building
-
-Each module can be built independently:
 
 ```bash
 cd OBF && make devinstall
@@ -96,9 +111,9 @@ cd Temporaliste && make devinstall
 ## Requirements
 
 - VCV Rack SDK 2.x
-- C++11 compatible compiler
-- Make build system
+- C++11 compiler
+- Make
 
 ## License
 
-MIT License - See individual LICENSE files in each module directory.
+MIT License
