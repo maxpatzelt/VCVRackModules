@@ -1,10 +1,10 @@
-#include "LfoModule.hpp"
+#include "OscillanceModule.hpp"
 #include <cmath>
 #include <random>
 
 using namespace rack;
 
-LfoModule::LfoModule() {
+OscillanceModule::OscillanceModule() {
     config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS);
     configParam(FREQUENCY_PARAM, 0.1f, 10.0f, 1.0f, "Frequency", " Hz");
     configParam(CHAOS_PARAM, 0.0f, 1.0f, 0.0f, "Chaos", "%", 0.f, 100.f);
@@ -13,7 +13,7 @@ LfoModule::LfoModule() {
     configOutput(GATE_OUTPUT, "Gate Out");
 }
 
-void LfoModule::process(const ProcessArgs &args) {
+void OscillanceModule::process(const ProcessArgs& args) {
     float baseFreq = params[FREQUENCY_PARAM].getValue();
     float chaosAmount = params[CHAOS_PARAM].getValue();
     
