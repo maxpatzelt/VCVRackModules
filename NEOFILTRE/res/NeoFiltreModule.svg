@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="121.92"
+   height="380"
+   viewBox="0 0 121.92 380"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="defs2" />
+  
+  <!-- Background -->
+  <rect
+     style="fill:#222222;stroke:none"
+     id="background"
+     width="121.92"
+     height="380"
+     x="0"
+     y="0"
+     rx="8" />
+  
+  <!-- Title -->
+  <text
+     xml:space="preserve"
+     style="font-size:14px;font-family:Helvetica, Arial, sans-serif;font-weight:bold;fill:#ffffff;text-anchor:middle"
+     x="60.96"
+     y="20"
+     id="title">NEOFILTRE</text>
+  
+  <!-- Knob circles - 2x2 grid matching NEOGEN -->
+  <!-- Left column X: 38.48px (13.16mm), Right column X: 76.8px (26.32mm) -->
+  <!-- Top row Y: 90 (30.48mm), Bottom row Y: 164 (55.8mm) -->
+  
+  <!-- COUPURE knob (top-left) -->
+  <circle
+     style="fill:#444444;stroke:#aaaaaa;stroke-width:2"
+     cx="38.48"
+     cy="90"
+     r="18"
+     id="coup_circle" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-family:sans-serif;fill:#ffffff;text-anchor:middle"
+     x="38.48"
+     y="120"
+     id="coup_label">Coup</text>
+  
+  <!-- RÉSONANCE knob (top-right) -->
+  <circle
+     style="fill:#444444;stroke:#aaaaaa;stroke-width:2"
+     cx="76.8"
+     cy="90"
+     r="18"
+     id="res_circle" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-family:sans-serif;fill:#ffffff;text-anchor:middle"
+     x="76.8"
+     y="120"
+     id="res_label">Rés</text>
+  
+  <!-- GAUSS knob (bottom-left) -->
+  <circle
+     style="fill:#444444;stroke:#aaaaaa;stroke-width:2"
+     cx="38.48"
+     cy="164"
+     r="18"
+     id="gauss_circle" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-family:sans-serif;fill:#ffffff;text-anchor:middle"
+     x="38.48"
+     y="186"
+     id="gauss_label">Gauss</text>
+  
+  <!-- SATINE knob (bottom-right) -->
+  <circle
+     style="fill:#444444;stroke:#aaaaaa;stroke-width:2"
+     cx="76.8"
+     cy="164"
+     r="18"
+     id="satine_circle" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-family:sans-serif;fill:#ffffff;text-anchor:middle"
+     x="76.8"
+     y="186"
+     id="satine_label">Satine</text>
+  
+  <!-- Audio IN (left) and OUT (right) at bottom -->
+  <!-- Y position: 320 (108.41mm matching NEOGEN) -->
+  
+  <!-- Audio IN -->
+  <circle
+     style="fill:#222222;stroke:#aaaaaa;stroke-width:2"
+     cx="38.48"
+     cy="320"
+     r="12"
+     id="in_circle" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-family:sans-serif;fill:#ffffff;text-anchor:middle"
+     x="38.48"
+     y="345"
+     id="in_label">In</text>
+  
+  <!-- Audio OUT -->
+  <circle
+     style="fill:#222222;stroke:#aaaaaa;stroke-width:2"
+     cx="76.8"
+     cy="320"
+     r="12"
+     id="out_circle" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;font-family:sans-serif;fill:#ffffff;text-anchor:middle"
+     x="76.8"
+     y="345"
+     id="out_label">Out</text>
+  
+</svg>
