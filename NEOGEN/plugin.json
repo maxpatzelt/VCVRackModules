@@ -1,0 +1,26 @@
+{
+  "slug": "NEOGEN",
+  "name": "NEOGEN",
+  "version": "2.0.0",
+  "license": "MIT",
+  "brand": "MaxPatzelt",
+  "author": "Max Patzelt",
+  "authorEmail": "maxptzlt@gmail.com",
+  "authorUrl": "https://github.com/maxpatzelt/VCVRackModules",
+  "pluginUrl": "https://github.com/maxpatzelt/VCVRackModules",
+  "manualUrl": "",
+  "sourceUrl": "https://github.com/maxpatzelt/VCVRackModules",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": [
+    {
+      "slug": "NeoGen",
+      "name": "NEOGEN",
+      "description": "Procedural digital waveform generator",
+      "tags": [
+        "Oscillator",
+        "Digital"
+      ]
+    }
+  ]
+}
