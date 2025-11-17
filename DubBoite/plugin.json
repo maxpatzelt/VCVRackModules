@@ -1,0 +1,16 @@
+{
+  "slug": "DubBoite",
+  "version": "2.0.0",
+  "license": "MIT",
+  "brand": "MaxPatzelt",
+  "name": "DubBoite",
+  "author": "Max Patzelt",
+  "modules": [
+    {
+      "slug": "DubBoiteModule",
+      "name": "DUBBOÎTE 2/4",
+      "description": "Dub Mixer with 2/4 Groove + Effects Diffusion",
+      "tags": [ "Mixer", "Effect", "Delay" ]
+    }
+  ]
+}

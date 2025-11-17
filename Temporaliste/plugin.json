@@ -1,0 +1,27 @@
+{
+  "slug": "Temporaliste",
+  "name": "TEMPORALISTE",
+  "version": "2.0.0",
+  "license": "MIT",
+  "brand": "RackDev",
+  "author": "Max Paterson",
+  "authorEmail": "",
+  "authorUrl": "",
+  "pluginUrl": "",
+  "manualUrl": "",
+  "sourceUrl": "",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": [
+    {
+      "slug": "Temporaliste",
+      "name": "TEMPORALISTE",
+      "description": "Generative Polyrhythm Sequencer with 2/4 Orientation",
+      "tags": [
+        "Sequencer",
+        "Clock modulator",
+        "Random"
+      ]
+    }
+  ]
+}

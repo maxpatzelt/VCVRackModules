@@ -1,0 +1,16 @@
+{
+  "slug": "SirenConcrete",
+  "version": "2.0.0",
+  "license": "MIT",
+  "brand": "MaxPatzelt",
+  "name": "SirenConcrete",
+  "author": "Max Patzelt",
+  "modules": [
+    {
+      "slug": "SirenConcreteModule",
+      "name": "SIREN CONCRÈTE",
+      "description": "Dub Siren + Musique-Concrète Sampler",
+      "tags": [ "Oscillator", "Granular", "Effect" ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="121.92mm" height="128.5mm" viewBox="0 0 121.92 128.5" xmlns="http://www.w3.org/2000/svg">
+  <!-- Panel Background - Green theme -->
+  <rect width="121.92" height="128.5" fill="#1a1a1a"/>
+  
+  <!-- Title -->
+  <text x="15" y="15" font-family="Arial" font-size="8" fill="#39e87c" font-weight="bold">OSCILLATEUR</text>
+  <text x="15" y="23" font-family="Arial" font-size="8" fill="#39e87c" font-weight="bold">TRITONIQUE</text>
+  
+  <!-- Knob labels -->
+  <text x="8" y="50" font-family="Arial" font-size="3.5" fill="#39e87c" text-anchor="middle">Topology</text>
+  <text x="22" y="50" font-family="Arial" font-size="3.5" fill="#39e87c" text-anchor="middle">Skew</text>
+  <text x="8" y="70" font-family="Arial" font-size="3.5" fill="#39e87c" text-anchor="middle">Bloom</text>
+  <text x="22" y="70" font-family="Arial" font-size="3.5" fill="#39e87c" text-anchor="middle">Glide</text>
+  
+  <!-- Port labels -->
+  <text x="8" y="108" font-family="Arial" font-size="3" fill="#39e87c" text-anchor="middle">V/Oct</text>
+  <text x="22" y="108" font-family="Arial" font-size="3" fill="#39e87c" text-anchor="middle">Out</text>
+  
+  <!-- Knob circles (2x2 grid) -->
+  <circle cx="8" cy="24" r="4" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  <circle cx="22" cy="24" r="4" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  <circle cx="8" cy="44" r="4" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  <circle cx="22" cy="44" r="4" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  
+  <!-- Attenuverter circles -->
+  <circle cx="8" cy="35" r="1.5" fill="none" stroke="#39e87c" stroke-width="0.2"/>
+  <circle cx="22" cy="35" r="1.5" fill="none" stroke="#39e87c" stroke-width="0.2"/>
+  <circle cx="8" cy="55" r="1.5" fill="none" stroke="#39e87c" stroke-width="0.2"/>
+  <circle cx="22" cy="55" r="1.5" fill="none" stroke="#39e87c" stroke-width="0.2"/>
+  
+  <!-- CV input circles -->
+  <circle cx="8" cy="65" r="2" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  <circle cx="22" cy="65" r="2" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  <circle cx="8" cy="85" r="2" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  <circle cx="22" cy="85" r="2" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  
+  <!-- V/Oct and Output circles -->
+  <circle cx="8" cy="100" r="2" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  <circle cx="22" cy="100" r="2" fill="none" stroke="#39e87c" stroke-width="0.3"/>
+  
+  <!-- Decorative elements - matching other modules -->
+  <circle cx="3" cy="115" r="0.4" fill="#39e87c"/>
+  <circle cx="6" cy="117" r="0.4" fill="#39e87c"/>
+  <circle cx="9" cy="115" r="0.4" fill="#39e87c"/>
+  
+  <circle cx="21" cy="115" r="0.4" fill="#39e87c"/>
+  <circle cx="24" cy="117" r="0.4" fill="#39e87c"/>
+  <circle cx="27" cy="115" r="0.4" fill="#39e87c"/>
+  
+  <!-- Decorative accent lines -->
+  <line x1="2" y1="78" x2="10" y2="78" stroke="#39e87c" stroke-width="0.2" opacity="0.6"/>
+  <line x1="20" y1="78" x2="28" y2="78" stroke="#39e87c" stroke-width="0.2" opacity="0.6"/>
+</svg>
