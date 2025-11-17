@@ -201,18 +201,62 @@ float NeoGenModule::generateNeuronSpike(float phase, float harmonics) {
 // ==================================================================
 
 float NeoGenModule::applyArtifact(float sample, float amount) {
-    // TODO: Implement bit crushing, aliasing, foldback, asymmetry
-    // For now: simple bit reduction + sample rate reduction
+    // Multi-stage artifact processing: bit crushing, aliasing, foldback, and asymmetric distortion
     
     if (amount < 0.01f) return sample;
     
-    // Bit reduction (quantization)
-    float bits = 16.0f - amount * 12.0f;  // 16-bit down to 4-bit
-    float steps = std::pow(2.0f, bits);
-    float quantized = std::round(sample * steps) / steps;
+    float processed = sample;
     
-    // Blend original and quantized
-    return sample * (1.0f - amount) + quantized * amount;
+    // Stage 1: Bit crushing (0.0 - 0.3)
+    if (amount > 0.0f) {
+        float bitAmount = clamp(amount * 3.33f, 0.0f, 1.0f);
+        float bits = 16.0f - bitAmount * 14.0f;  // 16-bit down to 2-bit
+        float steps = std::pow(2.0f, bits);
+        processed = std::round(processed * steps) / steps;
+    }
+    
+    // Stage 2: Sample rate reduction / aliasing (0.2 - 0.5)
+    if (amount > 0.2f) {
+        float aliasAmount = clamp((amount - 0.2f) * 3.33f, 0.0f, 1.0f);
+        // Create staircase effect by holding values
+        float holdFactor = 1.0f + aliasAmount * 15.0f;  // Hold for up to 16 samples
+        processed = std::round(processed * holdFactor) / holdFactor;
+    }
+    
+    // Stage 3: Wave folding (0.4 - 0.7)
+    if (amount > 0.4f) {
+        float foldAmount = clamp((amount - 0.4f) * 3.33f, 0.0f, 1.0f);
+        float gain = 1.0f + foldAmount * 3.0f;  // Increase gain to induce folding
+        processed = processed * gain;
+        // Fold back when exceeding ±1.0
+        while (processed > 1.0f) processed = 2.0f - processed;
+        while (processed < -1.0f) processed = -2.0f - processed;
+    }
+    
+    // Stage 4: Asymmetric distortion (0.6 - 1.0)
+    if (amount > 0.6f) {
+        float asymAmount = clamp((amount - 0.6f) * 2.5f, 0.0f, 1.0f);
+        // Apply different processing to positive and negative halves
+        if (processed > 0.0f) {
+            // Positive: hard clip with offset
+            processed = clamp(processed * (1.0f + asymAmount * 2.0f), 0.0f, 1.0f);
+        } else {
+            // Negative: soft fold
+            processed = processed / (1.0f + std::abs(processed) * asymAmount * 3.0f);
+        }
+    }
+    
+    // Stage 5: Digital glitch (0.8 - 1.0)
+    if (amount > 0.8f) {
+        float glitchAmount = (amount - 0.8f) * 5.0f;
+        // XOR-like operation for digital artifacts
+        int quantized = static_cast<int>(processed * 32767.0f);
+        quantized ^= static_cast<int>(glitchAmount * 1024.0f);
+        processed = static_cast<float>(quantized) / 32767.0f;
+        processed = clamp(processed, -1.0f, 1.0f);
+    }
+    
+    return processed;
 }
 
 float NeoGenModule::applyDrive(float sample, float amount) {
