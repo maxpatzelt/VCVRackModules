@@ -1,19 +1,17 @@
 # VCV Rack Modules Collection
 
-A collection of experimental VCV Rack modules featuring French-themed experimental synthesis and dub/musique-concrète oriented processors.
+A collection of experimental VCV Rack modules inspired by early French electronic music traditions—musique concrète, acousmatic composition, and dub-influenced electroacoustic processing. These modules embrace tape manipulation, spectral transformation, granular synthesis, and spatial effects rooted in the pioneering work of GRM (Groupe de Recherches Musicales) and Jamaican dub studio techniques.
 
-## Module Collections
+## Modules
 
-### French Experimental Series
-
-#### OBF (Oscillateur à Basse Fréquence)
+### OBF (Oscillateur à Basse Fréquence)
 **2HP Purple-themed LFO**
 - Low-frequency oscillator with chaos parameter
 - Gate input and output for synchronization
 - Sine wave output
 - Color scheme: Purple (#9b59d0)
 
-#### SONOGENESE
+### SONOGENESE
 **4HP Gold-themed Experimental VCO**
 - Granular fragmentation with jittered grain synthesis
 - Chebyshev polynomial topology warping (orders 2-9)
@@ -21,7 +19,7 @@ A collection of experimental VCV Rack modules featuring French-themed experiment
 - Spectral bloom with up to 16 harmonics (9x spread)
 - Color scheme: Gold (#e8b339)
 
-#### DIFFUSAIRE
+### DIFFUSAIRE
 **4HP Cyan-themed Spectral Filter**
 - Multi-pole cascaded filter with morphing contours
 - Variable resonance modes (soft analog → metallic → fractalized)
@@ -29,11 +27,7 @@ A collection of experimental VCV Rack modules featuring French-themed experiment
 - Cinematic wow and flutter modulation
 - Color scheme: Cyan (#39c5e8)
 
----
-
-### Dub/Musique-Concrète Series
-
-#### SIREN CONCRÈTE
+### SIREN CONCRÈTE
 **4HP Red-themed Dub Siren with Musique-Concrète Granular Sampling**
 - **Grain Morph**: Granular texture scatter (8 grains with jittered playback)
 - **Spectral Shift**: Harmonic frequency shifting (16 harmonics, 0-2x)
@@ -42,7 +36,7 @@ A collection of experimental VCV Rack modules featuring French-themed experiment
 - V/Oct input, audio output
 - Color scheme: Red (#e83939)
 
-#### DUBBOÎTE 2/4
+### DUBBOÎTE 2/4
 **4HP Orange-themed 4-Channel Dub Mixer with 2/4 Groove Orientation**
 - **Send Diffusion**: Multi-path spatial diffusion (8 paths, 10-90ms)
 - **Tape Scrub**: LFO-modulated delay for tape wobble (0.3-2.3Hz)
@@ -51,7 +45,7 @@ A collection of experimental VCV Rack modules featuring French-themed experiment
 - 4 channel inputs, mix output, send output
 - Color scheme: Orange (#e8a039)
 
-#### OSCILLATEUR TRITONIQUE
+### OSCILLATEUR TRITONIQUE
 **4HP Green-themed Tritone Stabs + Wandering Bass Engine**
 - **Topology Warp**: Morph sine → sawtooth → folded waveforms
 - **Temporal Skew**: Micro-delay modulation for timing instability (0-10ms)
@@ -60,7 +54,7 @@ A collection of experimental VCV Rack modules featuring French-themed experiment
 - V/Oct input, audio output
 - Color scheme: Green (#39e87c)
 
-#### TEMPORALISTE
+### TEMPORALISTE
 **4HP Teal-themed Generative Polyrhythm Sequencer with 2/4 Orientation**
 - **Polyrhythmic Density**: Controls active layers (1-4) and probability
 - **Stochastic Drift**: Probabilistic timing variation and phase offset
@@ -71,26 +65,33 @@ A collection of experimental VCV Rack modules featuring French-themed experiment
 
 ---
 
+## Design Philosophy
+
+This collection draws from the electroacoustic traditions of Pierre Schaeffer's musique concrète, the acousmatic practices of François Bayle and GRM, and the spatial/temporal manipulation techniques pioneered in Jamaican dub studios. Each module embodies:
+
+- **Tape manipulation**: Wow, flutter, scrub, and phase drift
+- **Spectral transformation**: Harmonic shifting, bloom, and morphing
+- **Granular synthesis**: Jittered grains, scattered playback, temporal fragmentation
+- **Spatial processing**: Multi-path diffusion, delay networks, echo chambers
+- **Acousmatic listening**: Sound divorced from its source, transformed through processing
+- **2/4 groove orientation**: Rhythm structures suited to dub/reggae traditions
+
 ## Common Architecture
 
-All dub/musique-concrète modules share:
+The dub-oriented modules (Siren Concrète, DubBoîte, Oscillateur Tritonique, Temporaliste) share:
 - **Width**: 4HP
 - **Knob Layout**: 2×2 grid with large knobs
 - **CV Control**: Full CV control with attenuverters for all parameters
-- **Color Coding**: Red → Orange → Green → Teal
-- **Decorative Elements**: Matching dot patterns and accent lines
+- **Color Progression**: Red → Orange → Green → Teal
 
 ## Building
 
 Each module can be built independently:
 
 ```bash
-# French Experimental Series
 cd OBF && make devinstall
 cd Sonogenese && make devinstall
 cd Diffusaire && make devinstall
-
-# Dub/Musique-Concrète Series
 cd SirenConcrete && make devinstall
 cd DubBoite && make devinstall
 cd OscillateurTritonique && make devinstall
@@ -102,12 +103,6 @@ cd Temporaliste && make devinstall
 - VCV Rack SDK 2.x
 - C++11 compatible compiler
 - Make build system
-
-## Design Philosophy
-
-**French Experimental Series**: Granular synthesis, spectral manipulation, and experimental DSP with French nomenclature.
-
-**Dub/Musique-Concrète Series**: Space, echo, tape effects, bass emphasis, granular synthesis, spectral manipulation, and 2/4 groove orientation for dub production and musique-concrète composition.
 
 ## License
 
