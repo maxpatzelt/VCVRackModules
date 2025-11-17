@@ -4,11 +4,11 @@ RACK_DIR ?= /c/Users/maxpa/Documents/RackDev/rack-sdk
  # (Removed custom default goal; use upstream plugin.mk defaults)
 
 # Plugin slug
-SLUG = Oscillance
+SLUG = OBF
 
 # Source files - must be set before including plugin.mk
 SOURCES += src/plugin.cpp
-SOURCES += src/OscillanceModule.cpp
+SOURCES += src/OBFModule.cpp
 
 # Include Rack build system
 include $(RACK_DIR)/plugin.mk

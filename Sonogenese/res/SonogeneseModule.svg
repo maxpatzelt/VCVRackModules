@@ -19,6 +19,16 @@
      y="0"
      rx="8" />
   
+  <!-- Gold decorative accent lines -->
+  <line x1="10" y1="35" x2="111.92" y2="35" stroke="#e8b339" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  <line x1="10" y1="345" x2="111.92" y2="345" stroke="#e8b339" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  
+  <!-- Decorative dots -->
+  <circle cx="20" cy="50" r="1.5" fill="#e8b339" opacity="0.6"/>
+  <circle cx="101.92" cy="50" r="1.5" fill="#e8b339" opacity="0.6"/>
+  <circle cx="20" cy="330" r="1.5" fill="#d4a030" opacity="0.6"/>
+  <circle cx="101.92" cy="330" r="1.5" fill="#d4a030" opacity="0.6"/>
+  
   <!-- Title -->
   <text
      xml:space="preserve"

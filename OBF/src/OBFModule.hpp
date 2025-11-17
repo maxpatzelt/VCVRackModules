@@ -1,7 +1,7 @@
 #pragma once
 #include "rack.hpp"
 
-struct OscillanceModule : rack::Module {
+struct OBFModule : rack::Module {
     enum ParamIds {
         FREQUENCY_PARAM,
         CHAOS_PARAM,
@@ -23,6 +23,6 @@ struct OscillanceModule : rack::Module {
     uint32_t rng = 12345u;
     bool lastGateHigh = false;
 
-    OscillanceModule();
+    OBFModule();
     void process(const ProcessArgs& args) override;
 };;
